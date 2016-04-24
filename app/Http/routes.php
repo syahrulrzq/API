@@ -11,11 +11,18 @@
 |
 */
 
+
 Route::get('/', 'WelcomeController@index');
-
 Route::get('home', 'HomeController@index');
-
+Route::get('getToken', 'API\APIController@getToken');
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+  'auth'  => 'Auth\AuthController',
+  'password'  => 'Auth\PasswordController'
 ]);
+
+Route::get('master/currency', 'HomeController@view_Currency');
+Route::get('cronGetCurrency', 'HomeController@get_Currency');
+Route::get('master/language', 'HomeController@view_Lang');
+Route::get('cronGetLanguage', 'HomeController@get_Lang');
+Route::get('master/country', 'HomeController@view_Country');
+Route::get('cronGetCountry', 'HomeController@get_Country');

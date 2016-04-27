@@ -10,8 +10,6 @@ class HomeController extends Controller {
 		$hasil = $api->getCurl('general_api/listCurrency');
 		\App\Currency::whereRaw('id>0')->delete();
 		$data = array();
-		dd($hasil);
-
 		foreach ($hasil->result as $key) {
 			$curr = new \App\Currency;
 			$curr->code = $key->code;
@@ -20,7 +18,7 @@ class HomeController extends Controller {
 			$data['id'][$curr->id] = $key->code;
 		}
 
-		echo json_decode(
+		echo json_encode(
 			array(
 				'status_code'=>200,
 				'insert_data'=>sizeof($data['id'])
@@ -32,6 +30,7 @@ class HomeController extends Controller {
 	{
 		$api = new API;
 		$hasil = $api->getCurl('general_api/listLanguage');
+		// print_r($hasil);
 		\App\Lang::whereRaw('id>0')->delete();
 		$data = array();
 		foreach ($hasil->result as $key) {
@@ -43,7 +42,7 @@ class HomeController extends Controller {
 			$data['id'][$lang->id] = $key->code;
 		}
 
-		echo json_decode(
+		echo json_encode(
 			array(
 				'status_code'	=> 200,
 				'inserted_data'	=> sizeof($data['id'])
@@ -57,16 +56,16 @@ class HomeController extends Controller {
 		$hasil = $api->getCurl('general_api/listCountry');
 		\App\Country::whereRaw('id>0')->delete();
 		$data = array();
-		foreach ($hasil->result as $key) {
-			$ctr = new \App\Lang;
+		foreach ($hasil->listCountry as $key) {
+			$ctr = new \App\Country;
 			$ctr->country_id = $key->country_id;
 			$ctr->country_name = $key->country_name;
 			$ctr->country_areacode = $key->country_areacode;
 			$ctr->save();
-			$data['id'][$ctr->id] = $key->code;
+			$data['id'][$ctr->id] = $key->country_id;
 		}
 
-		echo json_decode(
+		echo json_encode(
 			array(
 				'status_code'	=> 200,
 				'inserted_data'	=> sizeof($data['id'])
@@ -83,9 +82,6 @@ class HomeController extends Controller {
 	public function view_Lang()
 	{
 		$s['data'] = \App\Lang::all();
-		// echo $data->code;
-		// $data = \App\Lang::all();
-		// die();
 		return view('master.lang')->with($s);
 	}
 

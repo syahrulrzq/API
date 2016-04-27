@@ -15,11 +15,11 @@ class APIController extends Controller {
 
 	public function getToken()
 	{
-		//\Session::put('token', '');
+		\Session::put('token', '');
 		if (session('token')=="") {
 			$URL = env(env('API_ENV'));
 			$curl = new \Curl\Curl();
-			$curl->setUserAgent('twh:22537337;PROSOFT;');
+			$curl->setUserAgent('twh.22537337;PROSOFT;');
 			$curl->setopt(CURLOPT_SSL_VERIFYPEER, FALSE);
 			$curl->get($URL."apiv1/payexpress", array(
 				'method' => 'getToken',
@@ -34,7 +34,7 @@ class APIController extends Controller {
 				$this->token = $json->token;
 				\Session::put('token', $json->token);
 			}
-			echo session('token');
+			// echo session('token');
 		} else {
 			$this->token = \Session::get('token');
 		}
@@ -44,7 +44,7 @@ class APIController extends Controller {
 	{
 		$URL = env(env('API_ENV'));
 		$curl = new \Curl\Curl();
-		$curl->setUserAgent('twh:22537337;PROSOFT;');
+		$curl->setUserAgent('twh.22537337;PROSOFT;');
 		$curl->setopt(CURLOPT_SSL_VERIFYPEER, FALSE);
 		$data+=array('output'=>'json', 'token' => $this->token);
 		$curl->get($URL.$endpoint, $data);

@@ -20,9 +20,11 @@ Route::controllers([
   'password'  => 'Auth\PasswordController'
 ]);
 
-Route::get('master/currency', 'HomeController@view_Currency');
-Route::get('cronGetCurrency', 'HomeController@get_Currency');
-Route::get('master/language', 'HomeController@view_Lang');
-Route::get('cronGetLanguage', 'HomeController@get_Lang');
-Route::get('master/country', 'HomeController@view_Country');
-Route::get('cronGetCountry', 'HomeController@get_Country');
+  Route::get('master/currency', 'HomeController@view_Currency');
+  Route::get('cronGetCurrency', 'HomeController@get_Currency');
+  Route::get('master/language', 'HomeController@view_Lang');
+  Route::get('cronGetLanguage', 'HomeController@get_Lang');
+  Route::get('master/country', 'HomeController@view_Country');
+  Route::get('cronGetCountry', 'HomeController@get_Country');
+  Route::get('master/airport', 'HomeController@view_Airport');
+  Route::get('cronGetAirport', 'HomeController@get_Airport');
